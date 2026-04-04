@@ -7,6 +7,8 @@
 
 ---
 
+To organize imports automatically, install this plugin:
+
 ```js
 npm install --save-dev prettier-plugin-organize-imports
 
@@ -16,7 +18,7 @@ npm install --save-dev prettier-plugin-organize-imports
 
 ---
 
-## 🌀 Scaffolding Your First Vite Project
+## 🌀 Create Your First Vite Project
 
 - [npm create vite@latest](https://vite.dev/guide/#scaffolding-your-first-vite-project)
 
@@ -163,3 +165,27 @@ Add this to your `.gitignore`:
 !.vscode/settings.json
 !.vscode/extensions.json
 ```
+
+---
+
+## ⚠️ Tailwind Class Sorting Not Working?
+
+If Tailwind classes are not being sorted automatically, the problem is usually the order of your Prettier plugins.
+
+`prettier-plugin-tailwindcss` must be **last** in the `plugins` array.
+
+```jsonc
+{
+    // ❌ Wrong
+    "plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-organize-imports"],
+}
+```
+
+```jsonc
+{
+    // ✅ Correct
+    "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
+}
+```
+
+Why? Tailwind sorts classes during the final formatting step. If another Prettier plugin runs after it, Tailwind's output gets overridden.
