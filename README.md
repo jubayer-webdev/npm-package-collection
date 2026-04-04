@@ -1,3 +1,27 @@
+## 📦 Packages List
+
+### Tailwind CSS
+
+- [Tailwind CSS Installation Using-Vite](https://tailwindcss.com/docs/installation/using-vite)
+- [Automatic Class Sorting with Prettier](https://tailwindcss.com/blog/automatic-class-sorting-with-prettier)
+
+---
+
+```js
+npm install --save-dev prettier-plugin-organize-imports
+
+```
+
+- [Prettier Plugin: Organize Imports](https://www.npmjs.com/package/prettier-plugin-organize-imports)
+
+---
+
+## 🌀 Scaffolding Your First Vite Project
+
+- [npm create vite@latest](https://vite.dev/guide/#scaffolding-your-first-vite-project)
+
+---
+
 ## ✨ Setup Prettier
 
 The `prettier` npm package you installed only works from the terminal (e.g., `npx prettier --write .`). It does **not** make the editor format on save by itself. For that, you need two things:

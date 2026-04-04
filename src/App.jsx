@@ -30,7 +30,7 @@ function App() {
                     />
                 </div>
                 <div>
-                    <h1 className="!text-red-500">Get started</h1>
+                    <h1 className="p-2 pt-4 !text-red-500">Get started</h1>
                     <p>
                         Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
                     </p>
