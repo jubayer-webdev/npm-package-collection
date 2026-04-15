@@ -1,3 +1,12 @@
+## 📚 Table of Contents
+
+1. [📦 Packages List](#-packages-list)
+2. [🌀 Create Your First Vite Project](#-create-your-first-vite-project)
+3. [✨ Setup Prettier](#-setup-prettier)
+4. [⚠️ Tailwind Class Sorting Not Working?](#%EF%B8%8F-tailwind-class-sorting-not-working)
+
+---
+
 ## 📦 Packages List
 
 ### Tailwind CSS
@@ -7,6 +16,8 @@
 
 ---
 
+- [Prettier Plugin: Organize Imports](https://www.npmjs.com/package/prettier-plugin-organize-imports)
+
 To organize imports automatically, install this plugin:
 
 ```js
@@ -14,7 +25,10 @@ npm install --save-dev prettier-plugin-organize-imports
 
 ```
 
-- [Prettier Plugin: Organize Imports](https://www.npmjs.com/package/prettier-plugin-organize-imports)
+- [react-feather](https://github.com/feathericons/react-feather)
+    - Reference: lws 5.6 React Lazy Load explained
+- [remarkable](https://www.npmjs.com/package/remarkable)
+    - Reference: [Lazy-loading components with Suspense](https://react.dev/reference/react/lazy#suspense-for-code-splitting)
 
 ---
 
