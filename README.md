@@ -4,7 +4,7 @@
 2. [🌀 Create Your First Vite Project](#-create-your-first-vite-project)
 3. [✨ Setup Prettier](#-setup-prettier)
 4. [⚠️ Tailwind Class Sorting Not Working?](#%EF%B8%8F-tailwind-class-sorting-not-working)
-
+5. [🟦 Show TypeScript red squiggles in the editor](#-show-typescript-red-squiggles-in-the-editor)
 ---
 
 ## 📦 Packages List
@@ -203,3 +203,38 @@ If Tailwind classes are not being sorted automatically, the problem is usually t
 ```
 
 Why? Tailwind sorts classes during the final formatting step. If another Prettier plugin runs after it, Tailwind's output gets overridden.
+
+---
+## 🟦 Show TypeScript red squiggles in the editor
+
+If TypeScript errors are not showing as red squiggles in Cursor/VS Code, make sure the built-in TypeScript validation is enabled. These squiggles come from the TypeScript language service, not ESLint.
+
+To enable it from Settings:
+1. Open Settings: `Ctrl + ,`
+2. Search for `typescript validate`
+3. Enable `TypeScript > Validate: Enable`
+
+![TypeScript validate setting](./images/typescript-validate.png)
+
+In `settings.json`, this setting should be missing or set to `true`:
+```json
+{
+    "typescript.validate.enable": true
+}
+```
+
+If you also want JavaScript files to show validation errors, enable this too:
+```json
+{
+    "javascript.validate.enable": true
+}
+```
+
+After changing the setting, restart the TypeScript server:
+```bash
+Ctrl + Shift + P → TypeScript: Restart TS Server
+```
+
+Then reopen the file or editor if needed. Type errors should now show as red squiggles in the editor.
+
+Remember: ESLint and TypeScript validation are different. ESLint checks linting rules, while TypeScript validation checks type errors.
