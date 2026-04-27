@@ -238,3 +238,14 @@ Ctrl + Shift + P → TypeScript: Restart TS Server
 Then reopen the file or editor if needed. Type errors should now show as red squiggles in the editor.
 
 Remember: ESLint and TypeScript validation are different. ESLint checks linting rules, while TypeScript validation checks type errors.
+
+### 🧩 TypeScript: Restart TS Server Command Is Missing or Don't find `typescript validate` in settings
+
+If the `TypeScript: Restart TS Server` command does not appear, the built-in TypeScript extension may be disabled.
+
+To fix it:
+1. Open the Extensions view (`Ctrl+Shift+X`).
+2. Search for `@builtin typescript`.
+3. Find **TypeScript and JavaScript Language Features**.
+4. If it is disabled, click **Enable**.
+5. If it is already enabled, disable it and enable it again to reset the extension.
