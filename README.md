@@ -1,13 +1,20 @@
 ## 📚 Table of Contents
 
-1. [📦 Packages List](#-packages-list)
-2. [🌀 Create Your First Vite Project](#-create-your-first-vite-project)
-3. [✨ Setup Prettier](#-setup-prettier)
-4. [⚠️ Tailwind Class Sorting Not Working?](#%EF%B8%8F-tailwind-class-sorting-not-working)
-5. [🟦 Show TypeScript red squiggles in the editor](#-show-typescript-red-squiggles-in-the-editor)
+1. [📄 Documents](#-documents)
+2. [📦 Packages List](#-packages-list)
+3. [🌀 Create Your First Vite Project](#-create-your-first-vite-project)
+4. [✨ Setup Prettier](#-setup-prettier)
+5. [⚠️ Tailwind Class Sorting Not Working?](#%EF%B8%8F-tailwind-class-sorting-not-working)
+6. [🟦 Show TypeScript red squiggles in the editor](#-show-typescript-red-squiggles-in-the-editor)
+
 ---
 
-## 📦 Packages List
+## 📄 Documents
+
+### prettier
+
+- [prettier install](https://prettier.io/docs/install)
+- [prettier options](https://prettier.io/docs/options)
 
 ### Tailwind CSS
 
@@ -16,7 +23,9 @@
 
 ---
 
-- [Prettier Plugin: Organize Imports](https://www.npmjs.com/package/prettier-plugin-organize-imports)
+## 📦 Packages List
+
+1.  [Prettier Plugin: Organize Imports](https://www.npmjs.com/package/prettier-plugin-organize-imports)
 
 To organize imports automatically, install this plugin:
 
@@ -25,9 +34,9 @@ npm install --save-dev prettier-plugin-organize-imports
 
 ```
 
-- [react-feather](https://github.com/feathericons/react-feather)
+2.  [react-feather](https://github.com/feathericons/react-feather)
     - Reference: lws 5.6 React Lazy Load explained
-- [remarkable](https://www.npmjs.com/package/remarkable)
+3.  [remarkable](https://www.npmjs.com/package/remarkable)
     - Reference: [Lazy-loading components with Suspense](https://react.dev/reference/react/lazy#suspense-for-code-splitting)
 
 ---
@@ -205,11 +214,13 @@ If Tailwind classes are not being sorted automatically, the problem is usually t
 Why? Tailwind sorts classes during the final formatting step. If another Prettier plugin runs after it, Tailwind's output gets overridden.
 
 ---
+
 ## 🟦 Show TypeScript red squiggles in the editor
 
 If TypeScript errors are not showing as red squiggles in Cursor/VS Code, make sure the built-in TypeScript validation is enabled. These squiggles come from the TypeScript language service, not ESLint.
 
 To enable it from Settings:
+
 1. Open Settings: `Ctrl + ,`
 2. Search for `typescript validate`
 3. Enable `TypeScript > Validate: Enable`
@@ -217,6 +228,7 @@ To enable it from Settings:
 ![TypeScript validate setting](./images/typescript-validate.png)
 
 In `settings.json`, this setting should be missing or set to `true`:
+
 ```json
 {
     "typescript.validate.enable": true
@@ -224,6 +236,7 @@ In `settings.json`, this setting should be missing or set to `true`:
 ```
 
 If you also want JavaScript files to show validation errors, enable this too:
+
 ```json
 {
     "javascript.validate.enable": true
@@ -231,6 +244,7 @@ If you also want JavaScript files to show validation errors, enable this too:
 ```
 
 After changing the setting, restart the TypeScript server:
+
 ```bash
 Ctrl + Shift + P → TypeScript: Restart TS Server
 ```
@@ -244,6 +258,7 @@ Remember: ESLint and TypeScript validation are different. ESLint checks linting 
 If the `TypeScript: Restart TS Server` command does not appear, the built-in TypeScript extension may be disabled.
 
 To fix it:
+
 1. Open the Extensions view (`Ctrl+Shift+X`).
 2. Search for `@builtin typescript`.
 3. Find **TypeScript and JavaScript Language Features**.
