@@ -1,9 +1,16 @@
+What is npm?
+
+npm (Node Package Manager) is a package manager for JavaScript that allows developers to share and reuse code. It hosts thousands of packages, which are pieces of reusable code, that you can easily integrate into your projects to extend functionality.
+You can access it at [npmjs.com](https://www.npmjs.com/).
+
+---
+
 ## 📚 Table of Contents
 
 1. [📄 Documents](#-documents)
 2. [📦 Packages List](#-packages-list)
 3. [🌀 Create Your First Vite Project](#-create-your-first-vite-project)
-4. [✨ Setup Prettier](#-setup-prettier)
+4. [✨ Setup Prettier for React / Next.js](#-setup-prettier-for-react--nextjs)
 5. [⚠️ Tailwind Class Sorting Not Working?](#%EF%B8%8F-tailwind-class-sorting-not-working)
 6. [🟦 Show TypeScript red squiggles in the editor](#-show-typescript-red-squiggles-in-the-editor)
 
@@ -11,7 +18,7 @@
 
 ## 📄 Documents
 
-### prettier
+### Prettier
 
 - [prettier install](https://prettier.io/docs/install)
 - [prettier options](https://prettier.io/docs/options)
@@ -47,7 +54,9 @@ npm install --save-dev prettier-plugin-organize-imports
 
 ---
 
-## ✨ Setup Prettier
+## ✨ Setup Prettier for React / Next.js
+
+Prettier is a code formatter. It keeps files such as JavaScript, TypeScript, JSX, TSX, CSS, JSON, and Markdown consistently formatted.
 
 The `prettier` npm package you installed only works from the terminal (e.g., `npx prettier --write .`). It does **not** make the editor format on save by itself. For that, you need two things:
 
@@ -60,8 +69,8 @@ To set up Prettier so that it automatically formats your code every time you sav
 
 For your editor to know how to format on save, it needs the Prettier extension.
 
-- Open the Extensions panel (`Ctrl+Shift+X` or `Cmd+Shift+X`).
-- Search for **Prettier - Code formatter** (by Esben Petersen) and install it.
+1. Open the Extensions panel (`Ctrl+Shift+X` or `Cmd+Shift+X`).
+2. Search for **Prettier - Code formatter** (by Esben Petersen) and install it.
 
 ### 📦 Step 2: Install Prettier in your Project
 
@@ -71,16 +80,24 @@ It's best practice to install Prettier locally in your project so everyone worki
 npm install --save-dev prettier
 ```
 
-### ⚙️ Step 3: Create a Prettier Config File
+### ⚙️ Step 3: Create a `prettier` Config File
 
-Create a file named `.prettierrc` in the root of your project. This tells Prettier what rules to follow. Here is a common example:
+Create a file named [.prettierrc](https://gist.github.com/jubayer-webdev/5786179582e20cb04dd08cc544410612) in the root of your project. This tells Prettier what rules to follow. Here is a common example:
+
+```bash
+node --eval "fs.writeFileSync('.prettierrc','{}\n')"
+```
 
 ```json
 {
+    "printWidth": 120,
     "tabWidth": 4,
     "trailingComma": "es5",
     "semi": true,
-    "singleQuote": false
+    "singleQuote": false,
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "endOfLine": "lf"
 }
 ```
 
@@ -117,12 +134,19 @@ If you want this to apply to **all** projects you open on your computer:
 
 You usually don't want Prettier to format build outputs or package folders. Create a `.prettierignore` file in your project root:
 
+```bash
+node --eval "fs.writeFileSync('.prettierignore','# Ignore artifacts:\nbuild\ncoverage\n')"
+```
+
 ```text
 node_modules
 dist
 build
+.next
 coverage
 ```
+
+Use `dist` for Vite/React build output and `.next` for Next.js build output.
 
 ### 📜 Step 6: (Optional) Add a format script
 
@@ -131,10 +155,16 @@ Update your `package.json` to include a format script:
 ```json
 {
     "scripts": {
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
     }
 }
 ```
+
+`npm run format` updates files. `npm run format:check` only checks whether files are already formatted.
+
+- [npx prettier file_path --check](https://prettier.io/docs/install)
+- [npx prettier file_path --write](https://prettier.io/docs/install)
 
 Running `npm run format` will:
 
@@ -142,6 +172,27 @@ Running `npm run format` will:
 - 📄 Find all supported files (`.js`, `.ts`, `.jsx`, `.tsx`, `.json`, `.css`, `.md`, etc.)
 - ✨ Format them automatically based on your `.prettierrc`
 - 💾 Save the changes directly
+
+### 🧹 Step 7: (Optional) Use Prettier with ESLint
+
+If the project uses ESLint, install `eslint-config-prettier`:
+
+```bash
+npm install --save-dev eslint-config-prettier
+```
+
+Then add it as the last config in `eslint.config.js`:
+
+```js
+import eslintConfigPrettier from "eslint-config-prettier";
+
+export default [
+    // other ESLint configs first
+    eslintConfigPrettier,
+];
+```
+
+`eslint-config-prettier` turns off ESLint formatting rules that conflict with Prettier. This lets Prettier handle formatting and ESLint handle code quality.
 
 ---
 
@@ -156,7 +207,7 @@ Running `npm run format` will:
 
 > ⚠️ **Note:** All four pieces must be configured for format-on-save to work properly.
 
----
+## Prettier formats the code first. ESLint checks for possible code problems after that.
 
 ### 🧠 How it works
 
