@@ -10,13 +10,15 @@ You can access it at [npmjs.com](https://www.npmjs.com/).
 1. [📄 Documents](#-documents)
 2. [📦 Packages List](#-packages-list)
 3. [🌀 Create Your First Vite Project](#-create-your-first-vite-project)
-4. [✨ Setup Prettier for React / Next.js](#-setup-prettier-for-react--nextjs)
+4. [⚙️ Setup Prettier for React / Next.js](#%EF%B8%8F-setup-prettier-for-react--nextjs)
 5. [⚠️ Tailwind Class Sorting Not Working?](#%EF%B8%8F-tailwind-class-sorting-not-working)
 6. [🟦 Show TypeScript red squiggles in the editor](#-show-typescript-red-squiggles-in-the-editor)
 
 ---
 
 ## 📄 Documents
+
+- [axios](https://axios.rest/)
 
 ### Prettier
 
@@ -32,18 +34,27 @@ You can access it at [npmjs.com](https://www.npmjs.com/).
 
 ## 📦 Packages List
 
-1.  [Prettier Plugin: Organize Imports](https://www.npmjs.com/package/prettier-plugin-organize-imports)
+- [axios](https://www.npmjs.com/package/axios)
 
-To organize imports automatically, install this plugin:
+- [prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss)
+- [eslint-plugin-prettier](https://www.npmjs.com/package/eslint-plugin-prettier)
+
+```js
+npm install --save-dev eslint-config-prettier
+```
+
+- [prettier-plugin-organize-imports](https://www.npmjs.com/package/prettier-plugin-organize-imports)
 
 ```js
 npm install --save-dev prettier-plugin-organize-imports
-
 ```
 
-2.  [react-feather](https://github.com/feathericons/react-feather)
+- [use-debounce](https://www.npmjs.com/package/use-debounce?activeTab=readme)
+- [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer)
+
+- [react-feather](https://github.com/feathericons/react-feather)
     - Reference: lws 5.6 React Lazy Load explained
-3.  [remarkable](https://www.npmjs.com/package/remarkable)
+- [remarkable](https://www.npmjs.com/package/remarkable)
     - Reference: [Lazy-loading components with Suspense](https://react.dev/reference/react/lazy#suspense-for-code-splitting)
 
 ---
@@ -54,7 +65,7 @@ npm install --save-dev prettier-plugin-organize-imports
 
 ---
 
-## ✨ Setup Prettier for React / Next.js
+## ⚙️ Setup Prettier for React / Next.js
 
 Prettier is a code formatter. It keeps files such as JavaScript, TypeScript, JSX, TSX, CSS, JSON, and Markdown consistently formatted.
 
@@ -80,24 +91,48 @@ It's best practice to install Prettier locally in your project so everyone worki
 npm install --save-dev prettier
 ```
 
-### ⚙️ Step 3: Create a `prettier` Config File
+If your project uses **Tailwind CSS**, also install the official Tailwind Prettier plugin so class names get sorted automatically:
 
-Create a file named [.prettierrc](https://gist.github.com/jubayer-webdev/5786179582e20cb04dd08cc544410612) in the root of your project. This tells Prettier what rules to follow. Here is a common example:
+```bash
+npm install --save-dev prettier-plugin-tailwindcss
+```
+
+### ✨ Step 3: Create a `.prettierrc` Config File
+
+Create a file named [.prettierrc](https://gist.github.com/jubayer-webdev/5786179582e20cb04dd08cc544410612) in the root of your project. This tells Prettier what rules to follow.
+
+Recommended config for React / Next.js:
+
+create the file from the terminal (Git Bash / macOS / Linux):
 
 ```bash
 node --eval "fs.writeFileSync('.prettierrc','{}\n')"
 ```
 
+then set the rules
+
 ```json
 {
     "printWidth": 120,
+    "useTabs": false,
     "tabWidth": 4,
     "trailingComma": "es5",
     "semi": true,
     "singleQuote": false,
     "bracketSpacing": true,
     "arrowParens": "always",
-    "endOfLine": "lf"
+    "jsxSingleQuote": false,
+    "bracketSameLine": false,
+    "endOfLine": "lf",
+    "singleAttributePerLine": true
+}
+```
+
+If you installed `prettier-plugin-tailwindcss`, add it to the same file:
+
+```json
+{
+    "plugins": ["prettier-plugin-tailwindcss"]
 }
 ```
 
@@ -105,7 +140,7 @@ node --eval "fs.writeFileSync('.prettierrc','{}\n')"
 
 You need to tell Cursor/VS Code to use Prettier as the default formatter and to trigger it when you save.
 
-#### 📁 Option A: Project-specific settings (Recommended)
+#### Option A: Project-specific settings (Recommended)
 
 This ensures anyone who opens this project gets the same format-on-save behavior.
 
@@ -122,7 +157,13 @@ This ensures anyone who opens this project gets the same format-on-save behavior
 }
 ```
 
-#### 🌍 Option B: Global settings
+Or create the same file from the terminal:
+
+```bash
+mkdir -p .vscode && printf '{\n    "editor.defaultFormatter": "esbenp.prettier-vscode",\n    "editor.formatOnSave": true\n}\n' > .vscode/settings.json
+```
+
+#### Option B: Global settings
 
 If you want this to apply to **all** projects you open on your computer:
 
@@ -130,13 +171,29 @@ If you want this to apply to **all** projects you open on your computer:
 2. Search for **"Format On Save"** and check the box.
 3. Search for **"Default Formatter"** and select **Prettier - Code formatter** from the dropdown.
 
+#### 🤝 What to push vs ignore from `.vscode`
+
+The `.vscode` folder can contain both personal preferences and shared workspace settings. You want to **share only the workspace settings** with your team.
+
+Add this to your `.gitignore`:
+
+```text
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+```
+
+What this does:
+
+- Push `.vscode/settings.json` — shared editor settings (default formatter, format-on-save)
+- Push `.vscode/extensions.json` — recommended extensions for the team
+- Ignore everything else inside `.vscode/` — personal/local-only preferences
+
+This way, the whole team gets the same Prettier setup and consistent formatting automatically.
+
 ### 🚫 Step 5: (Optional) Add a `.prettierignore` file
 
 You usually don't want Prettier to format build outputs or package folders. Create a `.prettierignore` file in your project root:
-
-```bash
-node --eval "fs.writeFileSync('.prettierignore','# Ignore artifacts:\nbuild\ncoverage\n')"
-```
 
 ```text
 node_modules
@@ -163,15 +220,21 @@ Update your `package.json` to include a format script:
 
 `npm run format` updates files. `npm run format:check` only checks whether files are already formatted.
 
-- [npx prettier file_path --check](https://prettier.io/docs/install)
-- [npx prettier file_path --write](https://prettier.io/docs/install)
+You can also run Prettier on a single file directly with `npx`:
+
+```bash
+npx prettier path/to/file --check
+npx prettier path/to/file --write
+```
+
+See the [Prettier CLI docs](https://prettier.io/docs/cli) for more options.
 
 Running `npm run format` will:
 
-- 🔍 Scan your entire project
-- 📄 Find all supported files (`.js`, `.ts`, `.jsx`, `.tsx`, `.json`, `.css`, `.md`, etc.)
-- ✨ Format them automatically based on your `.prettierrc`
-- 💾 Save the changes directly
+- Scan your entire project
+- Find all supported files (`.js`, `.ts`, `.jsx`, `.tsx`, `.json`, `.css`, `.md`, etc.)
+- Format them automatically based on your `.prettierrc`
+- Save the changes directly
 
 ### 🧹 Step 7: (Optional) Use Prettier with ESLint
 
@@ -181,7 +244,13 @@ If the project uses ESLint, install `eslint-config-prettier`:
 npm install --save-dev eslint-config-prettier
 ```
 
-Then add it as the last config in `eslint.config.js`:
+`eslint-config-prettier` turns off ESLint formatting rules that conflict with Prettier, so ESLint handles **code quality** and Prettier handles **formatting**.
+
+It must be the **last** config in the array so it can override formatting rules from earlier configs.
+
+#### ⚛️ For React / Vite projects
+
+Open `eslint.config.js` and add `eslint-config-prettier` at the end:
 
 ```js
 import eslintConfigPrettier from "eslint-config-prettier";
@@ -192,22 +261,49 @@ export default [
 ];
 ```
 
-`eslint-config-prettier` turns off ESLint formatting rules that conflict with Prettier. This lets Prettier handle formatting and ESLint handle code quality.
+#### ▲ For Next.js projects (15.5+ / 16)
+
+Open `eslint.config.mjs` and add `eslint-config-prettier` after the Next.js configs:
+
+```js
+import { defineConfig, globalIgnores } from "eslint/config";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
+import eslintConfigPrettier from "eslint-config-prettier";
+
+const eslintConfig = defineConfig([
+    ...nextVitals,
+    ...nextTs,
+    eslintConfigPrettier,
+    // Override default ignores of eslint-config-next.
+    globalIgnores([
+        // Default ignores of eslint-config-next:
+        ".next/**",
+        "out/**",
+        "build/**",
+        "next-env.d.ts",
+    ]),
+]);
+
+export default eslintConfig;
+```
+
+> ⚠️ On older Next.js versions (below 15.5) the `eslint-config-next/core-web-vitals` and `eslint-config-next/typescript` subpaths do not exist. Use the `FlatCompat` approach instead.
 
 ---
 
 ### 📊 Prettier Setup Summary
 
-| Piece                          | What it does                            |
-| ------------------------------ | --------------------------------------- |
-| 📦 `prettier` npm package      | Lets you run Prettier from the terminal |
-| ⚙️ `.prettierrc`               | Defines your formatting rules           |
-| 🔌 Prettier VS Code extension  | Runs Prettier inside the editor         |
-| 💾 `editor.formatOnSave: true` | Automatically formats files on save     |
+| Piece                       | What it does                            |
+| --------------------------- | --------------------------------------- |
+| `prettier` npm package      | Lets you run Prettier from the terminal |
+| `.prettierrc`               | Defines your formatting rules           |
+| Prettier VS Code extension  | Runs Prettier inside the editor         |
+| `editor.formatOnSave: true` | Automatically formats files on save     |
 
 > ⚠️ **Note:** All four pieces must be configured for format-on-save to work properly.
 
-## Prettier formats the code first. ESLint checks for possible code problems after that.
+> 💡 **Recommended workflow:** run `npm run format` first, then `npm run lint`. Prettier formats the code first, and ESLint checks for possible code problems after that.
 
 ### 🧠 How it works
 
@@ -219,44 +315,25 @@ When you press `Ctrl + S` (or `Cmd + S`):
 
 ---
 
-### 🤝 What to push vs ignore from `.vscode`
-
-Push **workspace settings** that help the whole team:
-
-```text
-.vscode/settings.json
-```
-
-This ensures:
-
-- Everyone uses Prettier
-- Consistent formatting across the team
-
-Add this to your `.gitignore`:
-
-```text
-.vscode/*
-!.vscode/settings.json
-!.vscode/extensions.json
-```
-
----
-
 ## ⚠️ Tailwind Class Sorting Not Working?
 
-If Tailwind classes are not being sorted automatically, the problem is usually the order of your Prettier plugins.
+If Tailwind classes are not being sorted automatically, the problem is usually the order of your Prettier plugins in `.prettierrc` file.
 
 `prettier-plugin-tailwindcss` must be **last** in the `plugins` array.
 
-```jsonc
+```json
 {
+    ....,
+
     // ❌ Wrong
     "plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-organize-imports"],
 }
 ```
 
-```jsonc
+```json
 {
+    ....,
+
     // ✅ Correct
     "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
 }
