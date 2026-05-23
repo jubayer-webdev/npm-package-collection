@@ -36,26 +36,28 @@ You can access it at [npmjs.com](https://www.npmjs.com/).
 
 - [axios](https://www.npmjs.com/package/axios)
 
+---
+
 - [prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss)
-- [eslint-plugin-prettier](https://www.npmjs.com/package/eslint-plugin-prettier)
+- [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier) `npm install --save-dev eslint-config-prettier`
 
-```js
-npm install --save-dev eslint-config-prettier
-```
+- [prettier-plugin-organize-imports](https://www.npmjs.com/package/prettier-plugin-organize-imports)`npm install --save-dev prettier-plugin-organize-imports`
 
-- [prettier-plugin-organize-imports](https://www.npmjs.com/package/prettier-plugin-organize-imports)
-
-```js
-npm install --save-dev prettier-plugin-organize-imports
-```
+---
 
 - [use-debounce](https://www.npmjs.com/package/use-debounce?activeTab=readme)
 - [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer)
 
-- [react-feather](https://github.com/feathericons/react-feather)
-    - Reference: lws 5.6 React Lazy Load explained
-- [remarkable](https://www.npmjs.com/package/remarkable)
-    - Reference: [Lazy-loading components with Suspense](https://react.dev/reference/react/lazy#suspense-for-code-splitting)
+---
+
+- [react-feather](https://github.com/feathericons/react-feather) `Reference: lws 5.6 React Lazy Load explained`
+- [remarkable](https://www.npmjs.com/package/remarkable) Reference: [Lazy-loading components with Suspense](https://react.dev/reference/react/lazy#suspense-for-code-splitting)
+
+---
+
+- Reference: [Internationalization (nextjs)](https://nextjs.org/docs/app/guides/internationalization#routing-overview)
+    - [@formatjs/intl-localematcher](https://www.npmjs.com/package/@formatjs/intl-localematcher)
+    - [negotiator](https://www.npmjs.com/package/negotiator)
 
 ---
 
